@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Invitación Premium</title>
+
+<meta property="og:title" content="💍 Camila & Andrés">
+<meta property="og:description" content="Te invitamos a nuestro matrimonio ❤️">
+<meta property="og:image" content="https://roygalan340.github.io/boda/preview.jpg">
+<meta property="og:url" content="https://roygalan340.github.io/boda/">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="💍 Camila & Andrés">
+<meta name="twitter:description" content="Te invitamos a nuestro matrimonio ❤️">
+<meta name="twitter:image" content="https://roygalan340.github.io/boda/preview.jpg">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#fdf6f0,#f7e7d3);
+color:#333;
+text-align:center;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+/* SPLASH */
+#splash{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#fdf6f0,#f7e7d3);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+text-align:center;
+}
+
+.loader{
+width:70%;
+height:10px;
+background:#eee;
+border-radius:20px;
+overflow:hidden;
+margin-top:20px;
+}
+
+.progress{
+height:100%;
+width:0%;
+background:linear-gradient(45deg,#d4af37,#f7e7a9);
+animation:load 3s linear forwards;
+}
+
+@keyframes load{
+from{width:0;}
+to{width:100%;}
+}
+
+/* TARJETA */
+.card{
+max-width:420px;
+width:100%;
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.4);
+border-radius:30px;
+padding:30px 20px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+h1{
+font-family:'Playfair Display',serif;
+font-size:38px;
+color:#b88b4a;
+}
+
+h2{
+font-family:'Playfair Display', serif;
+font-style:italic;
+font-size:26px;
+color:#8b5e3c;
+margin:10px 0 20px;
+}
+
+.subtitle{
+margin-top:8px;
+font-size:15px;
+opacity:.85;
+font-style:italic;
+}
+
+.countdown{
+display:flex;
+justify-content:space-between;
+margin:25px 0;
+}
+
+.box{
+flex:1;
+margin:5px;
+background:rgba(255,255,255,.8);
+padding:12px;
+border-radius:18px;
+}
+
+.box span{
+display:block;
+font-size:26px;
+font-weight:700;
+color:#b88b4a;
+}
+
+.btn{
+display:block;
+text-decoration:none;
+margin:12px 0;
+padding:14px;
+border-radius:30px;
+font-weight:600;
+font-size:16px;
+background:linear-gradient(45deg,#f8d7da,#fbeaec);
+color:#8b5e3c;
+box-shadow:0 4px 10px rgba(0,0,0,.08);
+border:1px solid #f3c6c9;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.03);
+background:linear-gradient(45deg,#fbeaec,#fff);
+}
+</style>
+</head>
+
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+<h1>GRUPO GALAN</h1>
+<p>INVITACIONES PREMIUM</p>
+<p>Preparando algo muy especial...</p>
+
+<div class="loader">
+<div class="progress"></div>
+</div>
+</div>
+
+<!-- INVITACIÓN -->
+<div class="card">
+
+<h1>💍 Nos Casamos 💍</h1>
+
+<h2>Camila & Andrés</h2>
+
+<h2 id="nombreInvitado">Invitado Especial</h2>
+
+<p>27 de Mayo de 2026 · 19:00 hrs</p>
+
+<p class="subtitle">Dentro de...</p>
+
+<div class="countdown" id="countdown"></div>
+
+<a class="btn" href="https://sites.google.com/view/matrimonio-alejandra-y-felipe/inicio" target="_blank">🌸 INVITACIÓN</a>
+
+<a class="btn" id="btnConfirmar" target="_blank">🤍 Confirmar Asistencia</a>
+
+<a class="btn" href="https://maps.google.com" target="_blank">📍 Ver Ubicación GPS</a>
+
+</div>
+
+<script>
+/* PERSONALIZAR NOMBRE */
+const params = new URLSearchParams(window.location.search);
+const nombre = params.get("nombre");
+
+/* LINK DEL FORMULARIO */
+const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSfnx5PU75Br2PaOKGBVk8NW99BJBaBShg3lndgQw7L5QnyzWg/viewform?usp=pp_url&entry.877086558=";
+                 
+
+/* MOSTRAR NOMBRE Y CREAR LINK */
+if(nombre){
+document.getElementById("nombreInvitado").innerHTML =
+nombre + "<br><span>esta invitación es para ti..</span>";
+
+document.getElementById("btnConfirmar").href =
+formBase + encodeURIComponent(nombre);
+}else{
+document.getElementById("btnConfirmar").href = formBase;
+}
+
+/* CONTADOR */
+const targetDate = new Date('May 27, 2026 19:00:00').getTime();
+
+setInterval(()=>{
+const now = new Date().getTime();
+const d = targetDate-now;
+
+const days=Math.floor(d/(1000*60*60*24));
+const hrs=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+const min=Math.floor((d%(1000*60*60))/(1000*60));
+const sec=Math.floor((d%(1000*60))/1000);
+
+document.getElementById('countdown').innerHTML=`
+<div class='box'><span>${days}</span>Días</div>
+<div class='box'><span>${hrs}</span>Hrs</div>
+<div class='box'><span>${min}</span>Min</div>
+<div class='box'><span>${sec}</span>Seg</div>`;
+},1000);
+
+/* OCULTAR SPLASH */
+setTimeout(()=>{
+document.getElementById("splash").style.display="none";
+},3000);
+</script>
+
+</body>
+</html>
