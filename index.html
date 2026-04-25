@@ -3,7 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Invitación Premium</title>
+
+<meta property="og:title" content="💍 Camila & Andrés">
+<meta property="og:description" content="Te invitamos a nuestro matrimonio ❤️">
+<meta property="og:image" content="https://roygalan340.github.io/boda4/preview.jpg">
+<meta property="og:url" content="https://roygalan340.github.io/boda4/">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="💍 Camila & Andrés">
+<meta name="twitter:description" content="Te invitamos a nuestro matrimonio ❤️">
+<meta name="twitter:image" content="https://roygalan340.github.io/boda4/preview.jpg">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -40,6 +52,48 @@ justify-content:center;
 align-items:center;
 z-index:9999;
 text-align:center;
+}
+
+.image-container{
+position:relative;
+width:140px;
+height:140px;
+margin-bottom:20px;
+}
+
+.ring{
+width:90px;
+height:90px;
+object-fit:cover;
+border-radius:20px;
+box-shadow:0 4px 15px rgba(0,0,0,.2);
+position:absolute;
+top:25px;
+left:25px;
+opacity:0;
+animation:fade 6s infinite;
+}
+
+.novios{
+width:140px;
+height:140px;
+object-fit:cover;
+border-radius:20px;
+box-shadow:0 4px 15px rgba(0,0,0,.2);
+position:absolute;
+top:0;
+left:0;
+opacity:0;
+animation:fade 6s infinite;
+animation-delay:3s;
+}
+
+@keyframes fade{
+0%{opacity:0;}
+10%{opacity:1;}
+45%{opacity:1;}
+55%{opacity:0;}
+100%{opacity:0;}
 }
 
 .loader{
@@ -143,6 +197,12 @@ background:linear-gradient(45deg,#fbeaec,#fff);
 
 <!-- SPLASH -->
 <div id="splash">
+
+<div class="image-container">
+<img src="anillo.jpg" class="ring">
+<img src="novios.jpg" class="novios">
+</div>
+
 <h1>GRUPO GALAN</h1>
 <p>INVITACIONES PREMIUM</p>
 <p>Preparando algo muy especial...</p>
@@ -156,35 +216,26 @@ background:linear-gradient(45deg,#fbeaec,#fff);
 <div class="card">
 
 <h1>💍 Nos Casamos 💍</h1>
-
 <h2>Camila & Andrés</h2>
-
 <h2 id="nombreInvitado">Invitado Especial</h2>
 
 <p>27 de Mayo de 2026 · 19:00 hrs</p>
-
 <p class="subtitle">Dentro de...</p>
 
 <div class="countdown" id="countdown"></div>
 
 <a class="btn" href="https://sites.google.com/view/matrimonio-alejandra-y-felipe/inicio" target="_blank">🌸 INVITACIÓN</a>
-
 <a class="btn" id="btnConfirmar" target="_blank">🤍 Confirmar Asistencia</a>
-
 <a class="btn" href="https://maps.google.com" target="_blank">📍 Ver Ubicación GPS</a>
 
 </div>
 
 <script>
-/* PERSONALIZAR NOMBRE */
 const params = new URLSearchParams(window.location.search);
 const nombre = params.get("nombre");
 
-/* LINK DEL FORMULARIO */
 const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSfnx5PU75Br2PaOKGBVk8NW99BJBaBShg3lndgQw7L5QnyzWg/viewform?usp=pp_url&entry.877086558=";
-                 
 
-/* MOSTRAR NOMBRE Y CREAR LINK */
 if(nombre){
 document.getElementById("nombreInvitado").innerHTML =
 nombre + "<br><span>esta invitación es para ti..</span>";
@@ -195,7 +246,6 @@ formBase + encodeURIComponent(nombre);
 document.getElementById("btnConfirmar").href = formBase;
 }
 
-/* CONTADOR */
 const targetDate = new Date('May 27, 2026 19:00:00').getTime();
 
 setInterval(()=>{
@@ -214,7 +264,6 @@ document.getElementById('countdown').innerHTML=`
 <div class='box'><span>${sec}</span>Seg</div>`;
 },1000);
 
-/* OCULTAR SPLASH */
 setTimeout(()=>{
 document.getElementById("splash").style.display="none";
 },3000);
